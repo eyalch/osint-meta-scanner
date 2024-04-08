@@ -4,11 +4,21 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
+structlog = "24.1.0"
+celery = { version = "5.3.6", extras = ["redis"] }
+sqlalchemy = "2.0.29"
+psycopg = "3.1.18"
+alembic = "1.13.1"
+
+[tool.poetry.group.server.dependencies]
 fastapi = "0.110.1"
 uvicorn = "0.29.0"
 
 [tool.poetry.group.test.dependencies]
 ruff = "0.3.5"
+
+[tool.poetry.group.scanner.dependencies]
+docker = "7.0.0"
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]
