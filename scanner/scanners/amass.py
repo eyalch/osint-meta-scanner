@@ -25,11 +25,12 @@ class AmassScanner(Scanner):
         log.info("Running container")
 
         for line in container.logs(follow=True, stream=True):
-            s = line.decode().strip()
+            log.debug("Got container output", line=line)
 
-            log.debug("Got container output", line=s)
-
-            if match := re.search(r"^(.*) \((\w+)\) --> \w+ --> (.*) \((\w+)\)$", s):
+            if match := re.search(
+                r"^(.*) \((\w+)\) --> \w+ --> (.*) \((\w+)\)$",
+                line.decode().strip(),
+            ):
                 from_val, from_type, to_val, to_type = match.groups()
 
                 self.handle_result(scan_id, from_type, from_val)
