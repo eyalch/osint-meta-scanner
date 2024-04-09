@@ -6,7 +6,7 @@ export interface Scan {
 }
 
 export const resultTypeMap: Record<string, string> = {
-  fqdn: "Subdomains",
+  domain: "Domains",
   ip_address: "IP addresses",
   email: "Emails",
   url: "URLs",

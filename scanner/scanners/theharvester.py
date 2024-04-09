@@ -38,7 +38,7 @@ class TheHarvesterScanner(Scanner):
         if "emails" in data:
             results += [(ResultType.EMAIL, email) for email in data["emails"]]
         if "hosts" in data:
-            results += [(ResultType.FQDN, host) for host in data["hosts"]]
+            results += [(ResultType.DOMAIN, host) for host in data["hosts"]]
         if "ips" in data:
             results += [(ResultType.IP_ADDRESS, ip) for ip in data["ips"]]
         if "interesting_urls" in data:

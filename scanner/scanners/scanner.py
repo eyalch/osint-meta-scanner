@@ -13,7 +13,7 @@ logger: structlog.stdlib.BoundLogger = structlog.get_logger(__name__)
 
 
 class ResultType(enum.Enum):
-    FQDN = "fqdn"
+    DOMAIN = "domain"
     IP_ADDRESS = "ip_address"
     EMAIL = "email"
     URL = "url"

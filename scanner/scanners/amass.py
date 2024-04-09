@@ -39,7 +39,7 @@ class AmassScanner(Scanner):
         mapped_type: ResultType
         match typ:
             case "FQDN":
-                mapped_type = ResultType.FQDN
+                mapped_type = ResultType.DOMAIN
             case "IPAddress":
                 mapped_type = ResultType.IP_ADDRESS
             case "ASN":

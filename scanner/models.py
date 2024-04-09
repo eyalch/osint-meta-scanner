@@ -27,7 +27,7 @@ class Scan(Base):
 
 class Result(Base):
     class Type(enum.Enum):
-        FQDN = "fqdn"
+        DOMAIN = "domain"
         IP_ADDRESS = "ip_address"
         EMAIL = "email"
         URL = "url"
