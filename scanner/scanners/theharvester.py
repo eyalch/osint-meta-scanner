@@ -34,7 +34,9 @@ class TheHarvesterScanner(Scanner):
         results = []
 
         if "asns" in data:
-            results += [(ResultType.ASN, asn) for asn in data["asns"]]
+            results += [
+                (ResultType.ASN, asn.removeprefix("AS")) for asn in data["asns"]
+            ]
         if "emails" in data:
             results += [(ResultType.EMAIL, email) for email in data["emails"]]
         if "hosts" in data:
