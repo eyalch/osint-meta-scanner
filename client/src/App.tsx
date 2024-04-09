@@ -11,6 +11,22 @@ export default function App() {
     queryFn: () => axios.get<Scan[]>("/api/scans").then((res) => res.data),
   })
 
+  function renderScans() {
+    if (scansQuery.isLoading) {
+      return <span aria-busy="true">Loading scans…</span>
+    }
+
+    if (scansQuery.isError) {
+      return <p>Error loading scans</p>
+    }
+
+    if (!scansQuery.data || scansQuery.data.length === 0) {
+      return <p>No scans</p>
+    }
+
+    return scansQuery.data.map((scan) => <ScanCard key={scan.id} scan={scan} />)
+  }
+
   return (
     <>
       <header>
@@ -28,16 +44,7 @@ export default function App() {
 
         <section>
           <h1>Most recent scans</h1>
-
-          {scansQuery.isLoading ? (
-            <span aria-busy="true">Loading scans…</span>
-          ) : scansQuery.isError ? (
-            <p>Error loading scans</p>
-          ) : scansQuery.data ? (
-            scansQuery.data.map((scan) => (
-              <ScanCard key={scan.id} scan={scan} />
-            ))
-          ) : null}
+          {renderScans()}
         </section>
       </main>
     </>
