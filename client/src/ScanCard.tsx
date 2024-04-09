@@ -66,17 +66,9 @@ export default function ScanCard({ scan }: ScanCardProps) {
       <footer style={{ display: "flex", gap: "var(--pico-spacing)" }}>
         <button
           aria-busy={resultsQuery.isFetching}
-          onClick={() => {
-            let promise: Promise<unknown> = Promise.resolve()
-
-            if (!resultsQuery.isFetched) {
-              promise = resultsQuery.refetch()
-            }
-
-            void promise.then(() => {
-              dialogRef.current?.showModal()
-            })
-          }}
+          onClick={() =>
+            void resultsQuery.refetch().then(dialogRef.current?.showModal)
+          }
         >
           View
         </button>
