@@ -1,7 +1,6 @@
 import datetime
 import enum
 import uuid
-from typing import List, Optional
 
 from sqlalchemy import ForeignKey, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -17,10 +16,10 @@ class Scan(Base):
         server_default=text("gen_random_uuid()"),
     )
     domain: Mapped[str]
-    started_at: Mapped[Optional[datetime.datetime]]
-    completed_at: Mapped[Optional[datetime.datetime]]
+    started_at: Mapped[datetime.datetime | None]
+    completed_at: Mapped[datetime.datetime | None]
 
-    results: Mapped[List["Result"]] = relationship(back_populates="scan")
+    results: Mapped[list["Result"]] = relationship(back_populates="scan")
 
     def __repr__(self):
         return f"Scan(id={str(self.id)!r}, domain={self.domain!r})"

@@ -1,6 +1,5 @@
 import datetime
 import uuid
-from typing import Optional
 
 from pydantic import BaseModel
 
@@ -14,8 +13,8 @@ class ScanCreate(BaseModel):
 class Scan(BaseModel):
     id: uuid.UUID
     domain: str
-    started_at: Optional[datetime.datetime]
-    completed_at: Optional[datetime.datetime]
+    started_at: datetime.datetime | None
+    completed_at: datetime.datetime | None
 
     class Config:
         from_attributes = True
