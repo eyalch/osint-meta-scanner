@@ -7,7 +7,7 @@ python = "^3.12"
 structlog = "24.1.0"
 celery = { version = "5.3.6", extras = ["redis"] }
 sqlalchemy = "2.0.29"
-psycopg = "3.1.18"
+psycopg = { version = "3.1.18", extras = ["binary"] }
 alembic = "1.13.1"
 
 [tool.poetry.group.server.dependencies]
