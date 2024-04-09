@@ -22,7 +22,11 @@ async def create_scan(data: schemas.ScanCreate, db: Session = Depends(get_db)):
     if service.check_in_progress_scan(db, data.domain):
         raise HTTPException(
             status_code=400,
-            detail="Scan for given domain is already in progress",
+            detail={
+                "error": "A scan for the given domain is already in progress",
+                "error_code": "scan_in_progress",
+                "domain": data.domain,
+            },
         )
 
     scan = service.create_scan(db, data.domain)
