@@ -7,7 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/client/dist" />
     </content>
-    <orderEntry type="jdk" jdkName="Poetry (osint-scanner)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Poetry (osint-meta-scanner)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

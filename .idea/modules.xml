@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/osint-scanner.iml" filepath="$PROJECT_DIR$/.idea/osint-scanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/osint-meta-scanner.iml" filepath="$PROJECT_DIR$/.idea/osint-meta-scanner.iml" />
     </modules>
   </component>
 </project>

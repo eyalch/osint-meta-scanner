@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "osint-scanner"
+name = "osint-meta-scanner"
 package-mode = false
 
 [tool.poetry.dependencies]
