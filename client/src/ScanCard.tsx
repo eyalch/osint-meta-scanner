@@ -82,7 +82,7 @@ export default function ScanCard({ scan }: ScanCardProps) {
         </button>
 
         <a
-          href={`/api/scans/${scan.id}/results`}
+          href={`/api/scans/${scan.id}/results/export`}
           role="button"
           className="outline"
         >

@@ -51,8 +51,8 @@ async def get_scan(scan_id: uuid.UUID, db: Session = Depends(get_db)):
     return scan
 
 
-@app.get("/scans/{scan_id}/results")
-async def get_scan_results(scan_id: uuid.UUID, db: Session = Depends(get_db)):
+@app.get("/scans/{scan_id}/results/export")
+async def export_scan_results(scan_id: uuid.UUID, db: Session = Depends(get_db)):
     scan = service.get_scan(db, scan_id)
 
     if scan is None:
