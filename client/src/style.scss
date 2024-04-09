@@ -1,0 +1,8 @@
+@use "@picocss/pico/scss/pico" with (
+  $semantic-root-element: "#root",
+  $enable-semantic-container: true
+);
+
+main > section {
+  margin-bottom: calc(var(--pico-spacing) * 3);
+}
