@@ -1,7 +1,6 @@
 import enum
 import uuid
 from abc import ABC, abstractmethod
-from typing import Generator
 
 import docker
 import structlog
@@ -32,11 +31,7 @@ class Scanner(ABC):
         pass
 
     @abstractmethod
-    def scan(
-        self,
-        scan_id: uuid.UUID,
-        domain: str,
-    ) -> Generator[tuple[ResultType, str], None, None]:
+    def scan(self, scan_id: uuid.UUID, domain: str):
         pass
 
     def store_results(self, scan_id: uuid.UUID, results: list[tuple[ResultType, str]]):
