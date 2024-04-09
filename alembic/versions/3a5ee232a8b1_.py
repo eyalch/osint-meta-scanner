@@ -1,19 +1,20 @@
 """empty message
 
-Revision ID: 55f91f24d89f
+Revision ID: 3a5ee232a8b1
 Revises:
-Create Date: 2024-04-10 01:39:35.154930
+Create Date: 2024-04-10 01:47:03.696333
 
 """
 
 from typing import Sequence, Union
 
 import sqlalchemy as sa
+from sqlalchemy.dialects import postgresql
 
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "55f91f24d89f"
+revision: str = "3a5ee232a8b1"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -37,13 +38,13 @@ def upgrade() -> None:
         "result",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("scan_id", sa.Uuid(), nullable=False),
+        sa.Column("value", postgresql.JSONB(astext_type=sa.Text()), nullable=False),
         sa.Column("tool", sa.String(), nullable=False),
         sa.Column(
             "type",
             sa.Enum("DOMAIN", "IP_ADDRESS", "EMAIL", "URL", "ASN", name="type"),
             nullable=False,
         ),
-        sa.Column("value", sa.String(), nullable=False),
         sa.ForeignKeyConstraint(["scan_id"], ["scan.id"]),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("scan_id", "tool", "type", "value", name="unique_result"),

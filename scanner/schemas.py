@@ -1,7 +1,7 @@
 import datetime
 import uuid
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Json
 
 from . import models
 
@@ -23,7 +23,7 @@ class Scan(BaseModel):
 class Result(BaseModel):
     tool: str
     type: models.Result.Type
-    value: str
+    value: Json
 
     class Config:
         from_attributes = True

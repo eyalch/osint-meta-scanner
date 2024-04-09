@@ -37,7 +37,7 @@ class Scanner(ABC):
     def store_results(
         self,
         scan_id: uuid.UUID,
-        results: tuple[ResultType, str] | list[tuple[ResultType, str]],
+        results: tuple[ResultType, any] | list[tuple[ResultType, any]],
     ):
         logger.info("Storing results")
 

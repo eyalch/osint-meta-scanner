@@ -2,7 +2,8 @@ import datetime
 import enum
 import uuid
 
-from sqlalchemy import ForeignKey, UniqueConstraint, text
+from sqlalchemy import Column, ForeignKey, UniqueConstraint, text
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base
@@ -39,7 +40,7 @@ class Result(Base):
     scan_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("scan.id"))
     tool: Mapped[str]
     type: Mapped[Type]
-    value: Mapped[str]
+    value = Column(JSONB, nullable=False)
 
     __table_args__ = (
         UniqueConstraint("scan_id", "tool", "type", "value", name="unique_result"),
