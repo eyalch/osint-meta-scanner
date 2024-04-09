@@ -34,8 +34,15 @@ class Scanner(ABC):
     def scan(self, scan_id: uuid.UUID, domain: str):
         pass
 
-    def store_results(self, scan_id: uuid.UUID, results: list[tuple[ResultType, str]]):
+    def store_results(
+        self,
+        scan_id: uuid.UUID,
+        results: tuple[ResultType, str] | list[tuple[ResultType, str]],
+    ):
         logger.info("Storing results")
+
+        if not isinstance(results, list):
+            results = [results]
 
         values = [
             {

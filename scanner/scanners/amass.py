@@ -47,5 +47,4 @@ class AmassScanner(Scanner):
             case _:
                 return
 
-        mapped_result = (mapped_type, result)
-        self.store_results(scan_id, [mapped_result])
+        self.store_results(scan_id, (mapped_type, result))
