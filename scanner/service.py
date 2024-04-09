@@ -45,7 +45,7 @@ def generate_results_csv(results: list[Result]):
         yield writer.writerow(
             {
                 "tool": result.tool,
-                "type": result.type,
+                "type": result.type.value,
                 "value": result.value,
             }
         )
