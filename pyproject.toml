@@ -17,7 +17,7 @@ uvicorn = "0.29.0"
 [tool.poetry.group.test.dependencies]
 ruff = "0.3.5"
 
-[tool.poetry.group.scanner.dependencies]
+[tool.poetry.group.worker.dependencies]
 docker = "7.0.0"
 
 [tool.ruff.lint]
