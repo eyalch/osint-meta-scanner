@@ -10,7 +10,7 @@ logger: structlog.stdlib.BoundLogger = structlog.get_logger(__name__)
 
 class AmassScanner(Scanner):
     id = "amass"
-    image = "amass"
+    image = "caffix/amass"
 
     def scan(self, scan_id: uuid.UUID, domain: str):
         container = self.docker_client.containers.run(
