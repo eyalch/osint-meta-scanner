@@ -1,0 +1,78 @@
+services:
+  app:
+    build:
+      context: .
+      target: server
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:pass@postgres/scanner
+      REDIS_URL: redis://redis
+    depends_on:
+      - postgres
+      - redis
+
+  worker:
+    build:
+      context: .
+      target: worker
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:pass@postgres/scanner
+      REDIS_URL: redis://redis
+    depends_on:
+      - postgres
+      - redis
+    user: root
+    volumes:
+      # This is not a good idea in production because it basically grants root
+      # privileges on the host to the container.
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  client:
+    build: client/
+    volumes:
+      - client-build:/app/dist
+
+  caddy:
+    image: caddy:2.7.6-alpine
+    configs:
+      - source: caddyfile
+        target: /etc/caddy/Caddyfile
+    depends_on:
+      - app
+      - client
+    volumes:
+      - client-build:/srv:ro
+    ports:
+      - 8080:80
+
+  postgres:
+    image: postgres:16.2-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: scanner
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2-alpine
+
+configs:
+  caddyfile:
+    content: |
+      :80
+
+      encode gzip
+
+      handle_path /api/* {
+          reverse_proxy app:8000
+      }
+
+      handle {
+          root * /srv
+          try_files {path} /index.html
+          file_server
+      }
+
+volumes:
+  client-build:
+  postgres-data:
