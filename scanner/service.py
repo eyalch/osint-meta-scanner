@@ -21,7 +21,7 @@ def create_scan(db: Session, domain: str):
 
 
 def get_scans(db: Session):
-    stmt = select(Scan)
+    stmt = select(Scan).order_by(Scan.started_at.desc())
     return db.execute(stmt).scalars().all()
 
 
