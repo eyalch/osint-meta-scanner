@@ -2,7 +2,7 @@ import { useMemo, useState } from "react"
 
 import { Result, resultTypeMap } from "./scan.ts"
 
-const toolNameMap: Record<string, string> = {
+const tools: Record<string, string> = {
   amass: "Amass",
   theharvester: "theHarvester",
 }
@@ -14,11 +14,6 @@ interface ScanResultsProps {
 
 export default function ScanResults({ results, onClose }: ScanResultsProps) {
   const [tool, setTool] = useState("")
-
-  const tools = useMemo(
-    () => Array.from(new Set(results.map((r) => r.tool))),
-    [results],
-  )
 
   const resultsByType = useMemo(() => {
     const _resultsByType = Object.fromEntries(
@@ -65,9 +60,9 @@ export default function ScanResults({ results, onClose }: ScanResultsProps) {
         >
           <option value="">All</option>
 
-          {tools.map((tool) => (
-            <option key={tool} value={tool}>
-              {toolNameMap[tool] || tool}
+          {Object.entries(tools).map(([id, name]) => (
+            <option key={id} value={id}>
+              {name}
             </option>
           ))}
         </select>
