@@ -67,7 +67,9 @@ export default function ScanCard({ scan }: ScanCardProps) {
         <button
           aria-busy={resultsQuery.isFetching}
           onClick={() =>
-            void resultsQuery.refetch().then(dialogRef.current?.showModal)
+            void resultsQuery
+              .refetch({ throwOnError: true })
+              .then(dialogRef.current?.showModal)
           }
         >
           View
