@@ -40,7 +40,9 @@ class Result(Base):
     __tablename__ = "result"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    scan_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("scan.id"))
+    scan_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("scan.id", ondelete="CASCADE")
+    )
     tool: Mapped[str]
     type: Mapped[Type]
     value = Column(JSONB, nullable=False)

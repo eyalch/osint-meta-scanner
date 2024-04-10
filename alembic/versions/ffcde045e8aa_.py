@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 520d18a146e7
+Revision ID: ffcde045e8aa
 Revises:
-Create Date: 2024-04-10 02:16:29.065751
+Create Date: 2024-04-10 04:19:37.889317
 
 """
 
@@ -14,7 +14,7 @@ from sqlalchemy.dialects import postgresql
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "520d18a146e7"
+revision: str = "ffcde045e8aa"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -55,7 +55,7 @@ def upgrade() -> None:
             ),
             nullable=False,
         ),
-        sa.ForeignKeyConstraint(["scan_id"], ["scan.id"]),
+        sa.ForeignKeyConstraint(["scan_id"], ["scan.id"], ondelete="CASCADE"),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("scan_id", "tool", "type", "value", name="unique_result"),
     )
