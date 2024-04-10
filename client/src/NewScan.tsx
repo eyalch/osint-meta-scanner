@@ -25,7 +25,12 @@ export default function NewScan({ onSubmitted }: NewScanProps) {
   const [domain, setDomain] = useState("")
 
   const mutation = useMutation({
-    mutationFn: (domain: string) => axios.post("/api/scans", { domain }),
+    mutationFn: async (domain: string) => {
+      await axios.post("/api/scans", { domain })
+
+      // Wait for a bit to allow the server to start the scan and assign a `started_at` timestamp.
+      await new Promise((resolve) => setTimeout(resolve, 500))
+    },
   })
 
   const dialogRef = useRef<DialogRef>(null)
