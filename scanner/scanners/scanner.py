@@ -1,4 +1,3 @@
-import enum
 import uuid
 from abc import ABC, abstractmethod
 
@@ -10,14 +9,6 @@ from sqlalchemy.orm import Session
 from scanner.models import Result
 
 logger: structlog.stdlib.BoundLogger = structlog.get_logger(__name__)
-
-
-class ResultType(enum.Enum):
-    DOMAIN = "domain"
-    IP_ADDRESS = "ip_address"
-    EMAIL = "email"
-    URL = "url"
-    ASN = "asn"
 
 
 class Scanner(ABC):
@@ -37,7 +28,7 @@ class Scanner(ABC):
     def store_results(
         self,
         scan_id: uuid.UUID,
-        results: tuple[ResultType, any] | list[tuple[ResultType, any]],
+        results: tuple[Result.Type, any] | list[tuple[Result.Type, any]],
     ):
         logger.info("Storing results")
 

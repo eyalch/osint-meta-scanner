@@ -3,7 +3,9 @@ import uuid
 
 import structlog
 
-from .scanner import ResultType, Scanner
+from scanner.models import Result
+
+from .scanner import Scanner
 
 logger: structlog.stdlib.BoundLogger = structlog.get_logger(__name__)
 
@@ -37,14 +39,14 @@ class AmassScanner(Scanner):
                 self.handle_result(scan_id, to_type, to_val)
 
     def handle_result(self, scan_id: uuid.UUID, typ: str, result: str):
-        mapped_type: ResultType
+        mapped_type: Result.Type
         match typ:
             case "FQDN":
-                mapped_type = ResultType.DOMAIN
+                mapped_type = Result.Type.DOMAIN
             case "IPAddress":
-                mapped_type = ResultType.IP_ADDRESS
+                mapped_type = Result.Type.IP_ADDRESS
             case "ASN":
-                mapped_type = ResultType.ASN
+                mapped_type = Result.Type.ASN
             case _:
                 return
 

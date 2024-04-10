@@ -3,7 +3,9 @@ import uuid
 
 import structlog
 
-from .scanner import ResultType, Scanner
+from scanner.models import Result
+
+from .scanner import Scanner
 
 logger: structlog.stdlib.BoundLogger = structlog.get_logger(__name__)
 
@@ -35,15 +37,15 @@ class TheHarvesterScanner(Scanner):
 
         if "asns" in data:
             results += [
-                (ResultType.ASN, asn.removeprefix("AS")) for asn in data["asns"]
+                (Result.Type.ASN, asn.removeprefix("AS")) for asn in data["asns"]
             ]
         if "emails" in data:
-            results += [(ResultType.EMAIL, email) for email in data["emails"]]
+            results += [(Result.Type.EMAIL, email) for email in data["emails"]]
         if "hosts" in data:
-            results += [(ResultType.DOMAIN, host) for host in data["hosts"]]
+            results += [(Result.Type.DOMAIN, host) for host in data["hosts"]]
         if "ips" in data:
-            results += [(ResultType.IP_ADDRESS, ip) for ip in data["ips"]]
+            results += [(Result.Type.IP_ADDRESS, ip) for ip in data["ips"]]
         if "interesting_urls" in data:
-            results += [(ResultType.URL, url) for url in data["interesting_urls"]]
+            results += [(Result.Type.URL, url) for url in data["interesting_urls"]]
 
         self.store_results(scan_id, results)
