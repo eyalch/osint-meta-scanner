@@ -11,3 +11,9 @@ server:
 
 @alembic *args:
   alembic $@
+
+migrate:
+  just alembic upgrade head
+
+generate-migration:
+  just alembic revision --autogenerate
