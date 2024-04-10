@@ -35,6 +35,11 @@
    ```sh
    just celery worker --loglevel=INFO
    ```
+7. Change directory into the client app and run its development server:
+   ```sh
+   cd client/
+   npm run dev
+   ```
 
 ## Deployment
 
