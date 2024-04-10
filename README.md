@@ -12,6 +12,17 @@
   > We use `just` as a task runner. It automatically loads the `.env` file and sets the environment variables.
 - [direnv](https://direnv.net/) (optional)
 
+### Scanner Images
+
+- [theHarvester](https://github.com/laramies/theHarvester)
+  ```sh
+  docker build -t theharvester https://github.com/laramies/theHarvester.git
+  ```
+- [Amass](https://github.com/owasp-amass/amass)
+  ```sh
+  docker pull caffix/amass
+  ```
+
 ## Development
 
 1. Install dependencies
