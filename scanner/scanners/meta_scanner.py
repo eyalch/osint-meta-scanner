@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from scanner import service
 
 from .amass import AmassScanner
+from .bbot import BBOTScanner
 from .theharvester import TheHarvesterScanner
 
 logger: structlog.stdlib.BoundLogger = structlog.get_logger(__name__)
@@ -18,6 +19,8 @@ class MetaScanner:
         self.db = db
         self.scanners = [
             TheHarvesterScanner(db, docker_client),
+            BBOTScanner(db, docker_client),
+            # Amass is last due to an issue that prevents its process from exiting.
             AmassScanner(db, docker_client),
         ]
 

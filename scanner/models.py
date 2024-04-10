@@ -33,6 +33,9 @@ class Result(Base):
         EMAIL = "email"
         URL = "url"
         ASN = "asn"
+        OPEN_PORT = "open_port"
+        TECHNOLOGY = "technology"
+        SOCIAL = "social"
 
     __tablename__ = "result"
 

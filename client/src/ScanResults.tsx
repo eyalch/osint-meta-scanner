@@ -1,10 +1,22 @@
 import { useMemo, useState } from "react"
 
-import { Result, resultTypeMap } from "./scan.ts"
+import { Result } from "./scan.ts"
 
 const tools: Record<string, string> = {
   amass: "Amass",
   theharvester: "theHarvester",
+  bbot: "BBOT",
+}
+
+const resultTypeMap: Record<string, string> = {
+  domain: "Domains",
+  ip_address: "IP addresses",
+  email: "Emails",
+  url: "URLs",
+  asn: "ASNs",
+  open_port: "Open Ports",
+  technology: "Technologies",
+  social: "Social Accounts",
 }
 
 interface ScanResultsProps {
@@ -16,18 +28,33 @@ export default function ScanResults({ results, onClose }: ScanResultsProps) {
   const [tool, setTool] = useState("")
 
   const resultsByType = useMemo(() => {
-    const _resultsByType = Object.fromEntries(
+    const byType = Object.fromEntries(
       Object.keys(resultTypeMap).map((type) => [type, new Set<string>()]),
     )
 
-    for (const result of results) {
-      if (!tool || result.tool === tool) {
-        _resultsByType[result.type].add(result.value)
+    const filteredResults = tool
+      ? results.filter((r) => r.tool === tool)
+      : results
+
+    for (const result of filteredResults) {
+      switch (result.type) {
+        case "technology":
+          byType[result.type].add(
+            `${result.value.technology} (${result.value.host})`,
+          )
+          break
+
+        case "social":
+          byType[result.type].add(result.value.url)
+          break
+
+        default:
+          byType[result.type].add(result.value)
       }
     }
 
     return Object.fromEntries(
-      Object.entries(_resultsByType).map(([type, results]) => [
+      Object.entries(byType).map(([type, results]) => [
         type,
         Array.from(results),
       ]),
